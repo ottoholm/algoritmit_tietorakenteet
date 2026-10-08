@@ -6,6 +6,7 @@ class LinkedList {
 public:
 	bool IsEmpty();
 	void Insert(int value);
+	void InsertEnd(int value);
 	void Print();
 	bool Find(int value);
 	bool Delete(int value);
