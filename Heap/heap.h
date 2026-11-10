@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_SIZE 255
+#define MAX_SIZE 10000000
 class Heap 
 {
 public:
@@ -10,7 +10,7 @@ public:
 
 	void Insert(int key);
 
-	//int DelMin();
+	int DelMin();
 
 	void Print();
 

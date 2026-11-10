@@ -27,14 +27,56 @@ void Heap::Insert(int key)
 	int parent_index = index / 2;
 	while (heapArray[parent_index] > heapArray[index] && index > 1) {
 		// SWAP:
-		int tmp = heapArray[parent_index];
+		int tmp_parent = heapArray[parent_index];
 
 		heapArray[parent_index] = heapArray[index];
-		heapArray[index] = tmp;
+		heapArray[index] = tmp_parent;
 
 		index = parent_index;
 		parent_index = index / 2;
 	}
+}
+
+int Heap::DelMin()
+{
+	// Smallest is the first in a min heap
+	int min_value = heapArray[1];
+
+	// Delete the smallest -> last will become first 
+	heapArray[1] = heapArray[Length()];
+	// Decerement length of the heap
+	heapArray[0]--;
+	
+	// Reordering:
+	int parent_index = 1;
+	int child_index = parent_index * 2;
+
+	while (child_index <= Length())
+	{
+		// if there is a second children and it is smaller, lets use it
+		if (child_index + 1 <= Length() && heapArray[child_index + 1] < heapArray[child_index])
+		{
+			child_index++;
+		}
+
+		// If order is already okay, then quit
+		if (heapArray[parent_index] <= heapArray[child_index])
+		{
+			break;
+		}
+
+		// Swtich older and the children
+		int tmp = heapArray[parent_index];
+		heapArray[parent_index] = heapArray[child_index];
+		heapArray[child_index] = tmp;
+
+		// And move forward in the heap for next check
+		parent_index = child_index;
+		child_index = parent_index * 2;
+	}
+
+	// Delete the min_value_index from heapArray
+	return min_value;
 }
 
 void Heap::Print()
@@ -45,3 +87,4 @@ void Heap::Print()
 	}
 	std::cout << std::endl;
 }
+
